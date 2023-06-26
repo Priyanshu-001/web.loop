@@ -26,7 +26,7 @@ jobs:
             node-version: ${{ matrix.node-version }}
       - run: yarn install && yarn global add @quasar/cli
       - run: yarn add cordova
-      - run: quasar build -m  android
+      - run:  loop.web.app | quasar build -m  android
       
       - name: Zip Cordova directory
         run: zip -r cordova.zip dist/cordova
