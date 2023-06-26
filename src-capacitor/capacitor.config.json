@@ -1,0 +1,10 @@
+{
+  "appId": "loop.web.app",
+  "appName": "loop.web",
+  "bundledWebRuntime": false,
+  "npmClient": "npm",
+  "webDir": "www",
+  "server": {
+    "androidScheme": "https"
+  }
+}

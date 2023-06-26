@@ -1,0 +1,12 @@
+{
+  "name": "web-loop",
+  "version": "0.0.1",
+  "description": "A Quasar Project",
+  "author": "Priyanshu Ahuja <26710303+Priyanshu-001@users.noreply.github.com>",
+  "private": true,
+  "dependencies": {
+    "@capacitor/app": "^5.0.0",
+    "@capacitor/cli": "^5.0.0",
+    "@capacitor/core": "^5.0.0"
+  }
+}
