@@ -28,7 +28,7 @@ jobs:
         run: echo "INPUT_VALUE=loop.web.app" >> $GITHUB_ENV
       - run: yarn install && yarn global add @quasar/cli
       - run: yarn add cordova
-      - run:  quasar build -m  android --input=$INPUT_VALUE
+      - run:  quasar build -m  android --skip-package
       
       - name: Zip Cordova directory
         run: zip -r cordova.zip dist/cordova
