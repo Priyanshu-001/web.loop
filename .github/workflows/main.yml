@@ -25,14 +25,8 @@ jobs:
         with:
             node-version: ${{ matrix.node-version }}
       - run: yarn install && yarn global add @quasar/cli
+#       - run: yarn install cordova
       - run: quasar build -m capacitor -T android --skip-pkg
-      - run: chmod +x ./src-capacitor/android/gradlew
-      - name: Gradle Android
-        uses: Raul6469/android-gradle-action@2.0.0
-        with:
-          args: ./src-capacitor/android/gradlew --project-dir=./src-capacitor/android assembleDebug
-      - run: zip -r ../android-debug.zip ./src-capacitor/android/app/build/outputs/apk/debug/
-    
       - name: Create a Release
         id: create_release
         uses: actions/create-release@v1
