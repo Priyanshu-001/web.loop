@@ -24,9 +24,11 @@ jobs:
         uses: actions/setup-node@v2.5.2
         with:
             node-version: ${{ matrix.node-version }}
+      - name: Set input as environment variable
+        run: echo "INPUT_VALUE=loop.web.app" >> $GITHUB_ENV
       - run: yarn install && yarn global add @quasar/cli
       - run: yarn add cordova
-      - run:  loop.web.app | quasar build -m  android
+      - run:  quasar build -m  android --input=$INPUT_VALUE
       
       - name: Zip Cordova directory
         run: zip -r cordova.zip dist/cordova
