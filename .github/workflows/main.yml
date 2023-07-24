@@ -1,57 +1,35 @@
-name: Quasar Android Build and Release
-
+name: Build Android App
 on:
   push:
-    branches: [ main ]
-  pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  build-capacitor:
+  build:
     runs-on: ubuntu-latest
-    
-    defaults:
-      run:
-        shell: bash
-
-    strategy:
-      matrix:
-         node-version: [16.x]
 
     steps:
-      - uses: actions/checkout@v2
-      - name: Setup NodeJS Environment ${{ matrix.node-version }}
-        uses: actions/setup-node@v2.5.2
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 8
+        uses: actions/setup-java@v2
         with:
-            node-version: ${{ matrix.node-version }}
-      - run: yarn install && yarn global add @quasar/cli
-      - run: quasar build -m capacitor -T android --skip-pkg
-      - run: chmod +x ./src-capacitor/android/gradlew
-      - name: Gradle Android
-        uses: vgaidarji/android-github-actions-build@v1.0.1
+          java-version: 8
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android-sdk@v2
+
+      - name: Install Gradle
+        run: sudo apt-get install -y gradle
+
+      - name: Install Node.js and npm
+        uses: actions/setup-node@v2
         with:
-          args: ./src-capacitor/android/gradlew --project-dir=./src-capacitor/android assembleDebug
-      - run: zip -r ../android-debug.zip ./src-capacitor/android/app/build/outputs/apk/debug/
-    
-      - name: Create a Release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ github.run_number }}
-          release_name: Release ${{ github.run_number }}
-          body: Automated Deployment
-          draft: false
-          prerelease: false
-          
-      - name: Upload a Release Asset
-        id: upload_release_asset
-        uses: actions/upload-release-asset@v1.0.2
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./android-debug.zip
-          asset_name: android-debug.zip
-          asset_content_type: appliction/zip
+          node-version: 14
+
+      - name: Install Quasar CLI
+        run: npm install -g @quasar/cli
+
+      - name: Build Android App
+        run: quasar build -m android --skip-pkg
