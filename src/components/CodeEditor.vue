@@ -1,5 +1,5 @@
 <template>
-  <q-card class="col q-pa-md ">
+  <q-card class="col q-pa-md "  style="min-height: 80vh;max-height:80vh;overflow-y: scroll;">
     <h3>CODE</h3>
     <!-- <q-btn> LEts go</q-btn> -->
     <q-splitter
@@ -20,7 +20,7 @@
 
       <template v-slot:after>
         <keep-alive>
-        <component :is="tabToComponent[tab]" />
+        <component :is="tabToComponent[tab]" @something="doc=>codeStore.pushCode(tab.toLowerCase(),doc)" />
       </keep-alive>
          <!-- <HtmlEditor/> -->
       </template>
@@ -29,11 +29,15 @@
 </template>
 
 <script setup>
-  // import {fromTextArea} from 'codemirror';
 
   import { defineProps, onMounted, toRefs,ref, computed } from 'vue';
+
+  import {useCodeStore} from 'src/stores/codeStore';
+
   import HtmlEditor from 'src/components/CodeEditors/HtmlEditor.vue';
   import JsEditor from 'src/components/CodeEditors/JsEditor.vue';
+  import CssEditor from 'src/components/CodeEditors/CssEditor.vue';
+
 
   const props= defineProps(['modelValue'])
   const {modelValue} = toRefs(props)
@@ -41,9 +45,9 @@
 
   const tab= ref('HTML')
   const splitterModel = ref()
-  const tabToComponent = {'HTML':HtmlEditor,'JS':JsEditor}
-  // const currentTab = computed(()=>tabToComponent[tab.value])
-  const currentTab = ref('HtmlEditor')
-  console.log(currentTab.value)
+  const tabToComponent = {'HTML':HtmlEditor,'JS':JsEditor, 'CSS':CssEditor}
+
+  const codeStore = useCodeStore()
+  // console.log(codeStore.pushCode(tab.value.toLowerCase(),))
 
 </script>

@@ -15,9 +15,9 @@
       <q-page-container>
         <q-page class="q-pa-md ">
          <div class="row q-gutter-sm " style="min-height: 80vh;">
-          <CodeEditor @something="abc=>html = abc"/>
+          <CodeEditor />
           <q-card class="col">
-            <iframe :srcdoc="html" class="full-height full-width">
+            <iframe :srcdoc="codeStore.finalCode" class="full-height full-width">
 
             </iframe>
           </q-card>
@@ -38,10 +38,7 @@
 <script setup>
   import {ref} from 'vue'
   import CodeEditor from 'src/components/CodeEditor.vue';
-  const html = ref('Hello')
+  import { useCodeStore } from 'src/stores/codeStore';
+  const codeStore = useCodeStore();
 </script>
-<style>
-textarea{
-  resize: none;
-}
-</style>
+
