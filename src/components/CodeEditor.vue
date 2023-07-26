@@ -1,6 +1,6 @@
 <template>
   <q-card class="col q-pa-md "  style="min-height: 80vh;max-height:80vh;overflow-y: scroll;">
-    <h3>CODE</h3>
+    <!-- <h3>CODE</h3> -->
     <!-- <q-btn> LEts go</q-btn> -->
     <q-splitter
       v-model="splitterModel"
@@ -15,6 +15,7 @@
           <q-tab name="HTML" icon="fa-brands fa-html5" class="text-orange" label="HTML"/>
           <q-tab name="CSS" icon="fa-brands fa-css3-alt" class="text-red" label="CSS" />
           <q-tab name="JS" label="JS" icon="fa-brands fa-js" class="text-amber" />
+          <q-tab name="API" label="API" icon="fa-solid fa-server" class="text-teal" />
         </q-tabs>
       </template>
 
@@ -37,7 +38,7 @@
   import HtmlEditor from 'src/components/CodeEditors/HtmlEditor.vue';
   import JsEditor from 'src/components/CodeEditors/JsEditor.vue';
   import CssEditor from 'src/components/CodeEditors/CssEditor.vue';
-
+  import FullEditor from './CodeEditors/ApiEditor/v0/FullEditor.vue';
 
   const props= defineProps(['modelValue'])
   const {modelValue} = toRefs(props)
@@ -45,7 +46,7 @@
 
   const tab= ref('HTML')
   const splitterModel = ref()
-  const tabToComponent = {'HTML':HtmlEditor,'JS':JsEditor, 'CSS':CssEditor}
+  const tabToComponent = {'HTML':HtmlEditor,'JS':JsEditor, 'CSS':CssEditor,'API':FullEditor}
 
   const codeStore = useCodeStore()
   // console.log(codeStore.pushCode(tab.value.toLowerCase(),))

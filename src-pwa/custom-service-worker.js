@@ -1,6 +1,6 @@
 import { registerRoute } from "workbox-routing";
 import { precacheAndRoute } from "workbox-precaching";
-caputre  =
+
 console.log("cookie");
 // Register a route to handle all GET requests
 registerRoute(
