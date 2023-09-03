@@ -1,7 +1,6 @@
 <template>
   <q-layout view="lHh lpr lFf" container style="min-height: 100vh" class="shadow-2 rounded-borders">
     <q-header elevated>
-      <q-btn @click="makeRequest"></q-btn>
         <q-toolbar>
           <q-btn flat round dense icon="menu" class="q-mr-sm" />
           <q-avatar>
@@ -41,6 +40,5 @@
   import CodeEditor from 'src/components/CodeEditor.vue';
   import { useCodeStore } from 'src/stores/codeStore';
   const codeStore = useCodeStore();
-  const makeRequest = ()=>fetch('hello')
 </script>
 

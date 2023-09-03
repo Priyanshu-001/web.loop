@@ -9,15 +9,20 @@ import {
   placeholder
 } from '@codemirror/view';
 import {css} from "@codemirror/lang-css"
+import { useCodeStore } from 'src/stores/codeStore';
+
 const editor = ref()
 const myView = ref(null)
 import { defineProps, onMounted, toRefs,ref, onUnmounted } from 'vue';
 
 const emit = defineEmits(['something'])
 const something = abc=>emit('something',abc)
+
+const codeStore = useCodeStore()
+
 onMounted(()=>{
     myView.value = new EditorView({
-    doc: ".hello{\ncolor:red;\n}",
+    doc: codeStore.css,
 
     extensions: [basicSetup, css(),
           EditorView.updateListener.of(view=>view.docChanged && something(view.state.doc.toString()) )

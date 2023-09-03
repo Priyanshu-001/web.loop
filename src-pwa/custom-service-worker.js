@@ -6,7 +6,7 @@ const helpers = {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   },
   getResource: (url /* handler CB url */) => {
-    const [_, resource] = url.pathname.split("qres", 2);
+    const [_, resource] = url.pathname.split("/qres/+/", 2);
     return !!resource && resource;
   },
 };
@@ -33,12 +33,15 @@ function engine() {
     function val(link) {
       return data.serve[link];
     }
-    return { val, isKnown, captureRoute };
+    function getResources() {
+      return data.serve;
+    }
+    return { val, isKnown, captureRoute, getResources };
   })();
   return fns;
 }
 
-let { val, isKnown, captureRoute } = engine();
+let { val, isKnown, captureRoute, getResources } = engine();
 const handlers = {
   responseHandler: async ({ url }) => {
     const {
@@ -69,5 +72,13 @@ registerRoute(
   // Define a custom handler to respond with 'hi'
   handlers.responseHandler
 );
+addEventListener("message", ({ data: { dest, payload } }) => {
+  console.log(dest);
+  //For routes/load only
+  payload.forEach((element) => {
+    captureRoute({ [element.rName]: element });
+  });
+  console.log(getResources());
+});
 
 precacheAndRoute(self.__WB_MANIFEST);

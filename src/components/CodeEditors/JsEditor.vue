@@ -9,15 +9,19 @@ import {
   placeholder
 } from '@codemirror/view';
 import {javascript} from "@codemirror/lang-javascript"
+import { useCodeStore } from 'src/stores/codeStore';
+
 const editor = ref()
 const myView = ref(null)
 import { defineProps, onMounted, toRefs,ref, onUnmounted } from 'vue';
 
 const emit = defineEmits(['something'])
 const something = abc=>emit('something',abc)
+
+const codeStore = useCodeStore();
 onMounted(()=>{
     myView.value = new EditorView({
-    doc: "const msg = 'hello' ",
+    doc: codeStore.js,
 
     extensions: [basicSetup, javascript(),
           EditorView.updateListener.of(view=>view.docChanged && something(view.state.doc.toString()) )

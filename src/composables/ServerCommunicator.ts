@@ -1,4 +1,4 @@
-import { onMounted, ref } from "vue";
+import { onMounted, ref, toRaw, unref } from "vue";
 
 export default function useServiceWorkerCommunication() {
   const isSupported = ref(false);
@@ -11,11 +11,11 @@ export default function useServiceWorkerCommunication() {
 
   function addNewRoutes(routelist) {
     //TODO: optimize it as it is highly unoptimized sending all routes for every update
-
+    console.log(toRaw(routelist.value));
     if (!isSupported.value) throw new Error("Service Worker Not Found");
     navigator.serviceWorker.controller.postMessage({
       dest: "routes/load",
-      payload: routelist.value,
+      payload: toRaw(routelist.value),
     });
   }
   return {

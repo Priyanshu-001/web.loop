@@ -2,9 +2,9 @@ import { defineStore } from "pinia";
 
 export const useCodeStore = defineStore("code", {
   state: () => ({
-    html: "",
-    js: "",
-    css: "",
+    html: " <body>    <h1>\n  hello\n </h1>\n</body>",
+    js: "const msg = 'hello'",
+    css: "h1{\ncolor:red;\n}",
   }),
 
   getters: {
