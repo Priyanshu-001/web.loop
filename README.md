@@ -1,7 +1,8 @@
 # loop.web (web-loop)
 
-A Quasar Project
-
+A online IDE to quickly prototype websites. I has a build-in api server which servers response locally through server-wrokers. Making the whole app run locally without any backend.
+## Security warning
+code runs in your iframe, may be vulnerable to attacks not tested yet.
 ## Install the dependencies
 ```bash
 yarn
