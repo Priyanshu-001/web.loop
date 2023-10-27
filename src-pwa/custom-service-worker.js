@@ -1,6 +1,17 @@
 import { registerRoute } from "workbox-routing";
 import { precacheAndRoute } from "workbox-precaching";
 console.log("cookie");
+
+
+// might break on versioning
+self.addEventListener('install', function(event) {
+  event.waitUntil(self.skipWaiting()); // Activate worker immediately
+});
+
+self.addEventListener('activate', function(event) {
+  event.waitUntil(self.clients.claim()); // Become available to all pages
+});
+//// END
 const helpers = {
   delay: (delayInms) => {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
