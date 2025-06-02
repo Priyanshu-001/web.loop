@@ -17,7 +17,7 @@ const helpers = {
     return new Promise((resolve) => setTimeout(resolve, delayInms));
   },
   getResource: (url /* handler CB url */) => {
-    const [_, resource] = url.pathname.split("/qres/+/", 2);
+    const [_, resource] = url.pathname.split("/qres/", 2);
     return !!resource && resource;
   },
 };

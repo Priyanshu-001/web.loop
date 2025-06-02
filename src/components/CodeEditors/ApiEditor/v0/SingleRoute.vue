@@ -43,8 +43,10 @@
           outlined
           toggle-color="primary"
           :options="[
-            {label: '200', value: 'text'},
-            {label: '300', value: 'json'},
+            200,
+            302,
+            400,
+            500,
           ]"
 
         />
@@ -58,8 +60,8 @@
           outlined
           toggle-color="primary"
           :options="[
-            {label: 'Text', value: 'text'},
-            {label: 'JSON', value: 'json'},
+            'text/plain',
+            'application/json',
           ]"
         />
 
