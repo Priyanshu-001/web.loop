@@ -18,8 +18,8 @@ import useServiceWorkerCommunication from 'src/composables/ServerCommunicator'
 
 const reloading = ref(false)
 // const routeAddition = ref({rname:'yoyou', })
-const allRoutes = ref([{rName:'Hello',content:'YO',contentType:'application/text',verb:'GET',statusCode:200},
-                      {rName:'/Keyal',content:'OKcat',contentType:'application/text',verb:'GET',statusCode:200}])
+const allRoutes = ref([{rName:'Hello',content:'YO',contentType:'text/plain',verb:'GET',statusCode:200},
+                      {rName:'/Keyal',content:'OKcat',contentType:'text/plain',verb:'GET',statusCode:200}])
 const lRoutes = computed(()=>allRoutes.value.length)
 const lastRName = computed(()=>allRoutes.value[lRoutes.value-1].rName)
 watch(lastRName,()=>{
