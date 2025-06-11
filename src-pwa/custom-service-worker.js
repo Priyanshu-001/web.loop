@@ -5,7 +5,7 @@ console.log("cookie");
 
 // might break on versioning
 self.addEventListener('install', function(event) {
-  event.waitUntil(self.skipWaiting()); // Activate worker immediately
+  self.skipWaiting(); // Activate worker immediately
 });
 
 self.addEventListener('activate', function(event) {
